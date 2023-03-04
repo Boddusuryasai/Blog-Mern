@@ -1,13 +1,13 @@
 const mongoose=require("mongoose")
-const userSchema= new mongoose.Schema({
+const postSchema= new mongoose.Schema({
   title:String,
   summary:String,
   content:String,
   cover:String,
-  author:{type:Schema.Types.ObjectId, ref:'User'},
+  author:{type:mongoose.Schema.Types.ObjectId, ref:'user'},
 }, {
   timestamps: true,
 });
 
 
-module.exports=mongoose.model("user",userSchema)
+module.exports=mongoose.model("Post",postSchema)
