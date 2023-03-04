@@ -8,6 +8,9 @@ const {
   
 } = require("../controllers/post");
 const getAccountUser = require("../middleware/getAccountUser")
+const singleFileUpload = require("../middleware/multer")
+
+
 
 const router = express.Router();
 
@@ -21,7 +24,7 @@ router.post("/signup",  [
     body('email', 'Enter a valid email').isEmail(),
     body('password', 'Password must be atleast 5 characters').isLength({ min: 5 }),
   ],signup)
-router.post("/post", getAccountUser , createPost);
+router.post("/post", getAccountUser , singleFileUpload,createPost);
 // router.get("/posts", getAllPosts);
 router.get("/post",getAccountUser ,getPosts);
 router.put("/post/:id",getAccountUser, editPost);

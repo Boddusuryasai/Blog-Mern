@@ -1,6 +1,7 @@
 
 const Post = require("../models/post");
-
+const getDataUri = require("../utils/dataUri")
+const cloudinary = require("cloudinary")
 exports.home = (req, res) => {
   res.send("Hello  Home ");
 };
@@ -10,15 +11,18 @@ exports.createPost = async (req, res) => {
     const {  title,
         summary,
         content,
-        cover} = req.body;
-        if ( !title || !summary || !content || !cover) {
+        } = req.body;
+        const file = req.file
+        const fileUri = getDataUri(file)
+        const cloud = await cloudinary.v2.uploader.upload(fileUri.content)
+        if ( !title || !summary || !content ) {
       throw new Error("All fields are mandotory");
     }
     
     const post = await Post.create({ title,
         summary,
         content,
-        cover,  author:req.user });
+        cover:cloud.secure_url,  author:req.user });
     res.status(201).json({
       success: true,
       message: "Post Created Successfully",
