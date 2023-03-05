@@ -15,7 +15,7 @@ const login=async (req,res)=>{
         if (checkuser && (await bcrypt.compare(password, checkuser.password))){ 
                 const payload = {id:checkuser._id}
                 const token = jwt.sign(payload,process.env.SECRET)
-                res.status(200).json({ success:true, token})
+                res.status(200).json({ success:true, token ,id:checkuser._id})
              }
              else{
        

@@ -36,7 +36,7 @@ exports.createPost = async (req, res) => {
 exports.getPosts = async (req, res) => {
   try {
    
-    const posts = await Post.find({ author: req.user });
+    const posts = await Post.find();
     res.status(200).json({
       success: true,
       posts,
@@ -49,7 +49,23 @@ exports.getPosts = async (req, res) => {
     });
   }
 };
-
+exports.getPost = async (req, res) => {
+  try {
+    const {id} = req.params
+    const posts = await Post.findById(id)
+    console.log(posts);
+    res.status(200).json({
+      success: true,
+      posts,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(401).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
 exports.editPost = async (req, res) => {
   try {
     let post = await Post.findById(req.params.id);

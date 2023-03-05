@@ -25,7 +25,7 @@ const signup=async (req,res)=>{
          }) 
           const payload = {id:newuser._id}
            const token = jwt.sign(payload,process.env.SECRET)
-           res.status(200).json({ success:true, token})
+           res.status(200).json({ success:true, token,id:newuser._id})
         }
          
         

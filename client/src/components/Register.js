@@ -17,7 +17,7 @@ const Register = () => {
     axios
       .post(`http://localhost:4000/signup`, userDetails)
       .then((response) => {
-        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("data", JSON.stringify(response.data));
         navigate("/Home/Blog");
       })
       .catch((error) => {

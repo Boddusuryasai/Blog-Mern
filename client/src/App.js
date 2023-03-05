@@ -3,6 +3,7 @@ import './App.css';
 import Login from './components/Login';
 import Register from './components/Register';
 import BlogList from './components/BlogList';
+import BlogDetails from './components/BlogDetails';
 import CreatePost from './components/CreatePost';
 import {
   createBrowserRouter,
@@ -26,6 +27,10 @@ const appRouter = createBrowserRouter([
     {
       path:"Blog",
       element:<BlogList/>
+    },
+    {
+      path:"Blog/:id",
+      element:<BlogDetails/>
     },
     {
       path:"CreatePost",

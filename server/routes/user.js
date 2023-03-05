@@ -5,6 +5,7 @@ const {
   getPosts,
   editPost,
   deletePost,
+  getPost
   
 } = require("../controllers/post");
 const getAccountUser = require("../middleware/getAccountUser")
@@ -26,7 +27,8 @@ router.post("/signup",  [
   ],signup)
 router.post("/post", getAccountUser , singleFileUpload,createPost);
 // router.get("/posts", getAllPosts);
-router.get("/post",getAccountUser ,getPosts);
+router.get("/posts",getAccountUser ,getPosts);
+router.get("/post/:id",getAccountUser ,getPost);
 router.put("/post/:id",getAccountUser, editPost);
 router.delete("/post/:id",getAccountUser, deletePost);
 module.exports = router;

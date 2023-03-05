@@ -9,20 +9,24 @@ const CreatePost = () => {
   const [content,setContent] = useState('');
   const [imgPrev,setImgPrev] = useState("");
   const [img,setImg] = useState("");
-  const token = localStorage.getItem("token");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const data = JSON.parse(localStorage.getItem("data"));
+ 
   const createPost = async (formData) => {
+    console.log(formData);
     try {
       const res = await axios({
         method: "post",
-        url: `http://localhost:4000/post`,
+        url: `/post`,
         data: formData,
-        headers: { "auth-token": token },
+        headers: { "auth-token": data.token },
       });
      
       
     } catch (error) {
       console.log(error);
     }
+    setIsSubmitting(false);
   };
   const handleImgUpload = (e) => {
     const file = e.target.files[0];
@@ -36,6 +40,10 @@ const CreatePost = () => {
 
   const handleSubmit=(e)=>{
     e.preventDefault()
+    if (isSubmitting) {
+      return;
+    }
+    setIsSubmitting(true);
    const formData = new FormData()
    formData.append("title" , title)
    formData.append("summary" , summary)
