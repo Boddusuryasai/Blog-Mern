@@ -5,12 +5,14 @@ import Register from './components/Register';
 import BlogList from './components/BlogList';
 import BlogDetails from './components/BlogDetails';
 import CreatePost from './components/CreatePost';
+
 import {
   createBrowserRouter,
   RouterProvider,
  
 } from "react-router-dom";
 import Main from './components/Main';
+import EditPost from './components/EditPost';
 const appRouter = createBrowserRouter([
   {
   path:"/",
@@ -33,9 +35,14 @@ const appRouter = createBrowserRouter([
       element:<BlogDetails/>
     },
     {
+      path:"edit/:id",
+      element:<EditPost/>
+    },
+    {
       path:"CreatePost",
       element:<CreatePost/>
-    }
+    },
+    
   ]
 }
 

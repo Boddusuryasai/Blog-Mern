@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import axios from 'axios';
 import 'react-quill/dist/quill.snow.css';
+import { useNavigate } from 'react-router-dom';
 
 const CreatePost = () => {
   const [title,setTitle] = useState('');
@@ -11,9 +12,9 @@ const CreatePost = () => {
   const [img,setImg] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const data = JSON.parse(localStorage.getItem("data"));
+  const navigate = useNavigate()
  
   const createPost = async (formData) => {
-    console.log(formData);
     try {
       const res = await axios({
         method: "post",
@@ -21,7 +22,7 @@ const CreatePost = () => {
         data: formData,
         headers: { "auth-token": data.token },
       });
-     
+      navigate("/Home/Blog")
       
     } catch (error) {
       console.log(error);

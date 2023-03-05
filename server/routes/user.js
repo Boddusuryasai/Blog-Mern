@@ -29,6 +29,6 @@ router.post("/post", getAccountUser , singleFileUpload,createPost);
 // router.get("/posts", getAllPosts);
 router.get("/posts",getAccountUser ,getPosts);
 router.get("/post/:id",getAccountUser ,getPost);
-router.put("/post/:id",getAccountUser, editPost);
+router.put("/post/:id",getAccountUser,singleFileUpload, editPost);
 router.delete("/post/:id",getAccountUser, deletePost);
 module.exports = router;

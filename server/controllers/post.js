@@ -68,18 +68,26 @@ exports.getPost = async (req, res) => {
 };
 exports.editPost = async (req, res) => {
   try {
+    const {  title,
+      summary,
+      content,
+      } = req.body;
     let post = await Post.findById(req.params.id);
         if (!post) { return res.status(404).send("Not Found") }
         if (post.author?.toString() !== req.user) {
             return res.status(401).send("Not Allowed");
         }
-    post = await Post.findByIdAndUpdate(req.params.id, { title:req.body.title,
-        summary:req.body.summary,
-        content:req.body.content,
-        cover:req.body.cover });
+        const file = req.file
+        const fileUri = getDataUri(file)
+        const cloud = await cloudinary.v2.uploader.upload(fileUri.content)
+    post = await Post.findByIdAndUpdate(req.params.id, { title,
+      summary,
+      content,
+      cover:cloud.secure_url,  author:req.user });
     res.status(200).json({
       success: true,
       message: "post updated Successfully",
+      post
     });
   } catch (error) {
     console.log(error);
