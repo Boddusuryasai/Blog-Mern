@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import {ImBlogger} from "react-icons/im"
 const Register = () => {
   const [userDetails, setUserDetails] = useState({
     username: "",
@@ -40,21 +41,26 @@ const Register = () => {
   };
 
   return (
-    <div class="h-screen flex">
-      <div class="flex w-1/2 bg-gradient-to-tr from-cyan-800 to-sky-700 i justify-around items-center">
+    <div className="h-screen flex">
+      <div className="flex w-1/2 bg-gradient-to-tr from-cyan-800 to-sky-700 i justify-around items-center">
         <div>
-          <h1 class="text-white font-bold text-4xl font-sans">Blog</h1>
-          <p class="text-white mt-1">The most popular blogging platform</p>
+        <div className='flex items-center ml-2 px-2 py-1 gap-1 text-cyan-200 bg-sky-600  rounded-lg'>
+          <ImBlogger size={"1.3rem"}></ImBlogger>
+          <h1 className='font-extrabold tracking-wide text-2xl'>LOG-HUNT</h1>
+        </div>
+
+
+          <p className="text-white mt-1">The most popular blogging platform</p>
         </div>
       </div>
-      <div class="flex w-1/2 justify-center items-center bg-white">
-        <form class="bg-white" onSubmit={(e)=>handleSubmit(e)}>
-          <h1 class="text-gray-800 font-bold text-2xl mb-1">Hello Again!</h1>
-          <p class="text-sm font-normal text-gray-600 mb-7">Welcome Back</p>
-          <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
+      <div className="flex w-1/2 justify-center items-center bg-white">
+        <form className="bg-white" onSubmit={(e)=>handleSubmit(e)}>
+          <h1 className="text-gray-800 font-bold text-2xl mb-1">Hello Again!</h1>
+          <p className="text-sm font-normal text-gray-600 mb-7">Welcome Back</p>
+          <div className="flex items-center border-2 py-2 px-3 rounded-2xl">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5 text-gray-400"
+              className="h-5 w-5 text-gray-400"
               viewBox="0 0 20 20"
               fill="currentColor"
             >
@@ -65,7 +71,7 @@ const Register = () => {
               />
             </svg>
             <input
-              class="pl-2 outline-none border-none"
+              className="pl-2 outline-none border-none"
               type="text"
               name="username"
               value={userDetails.username}
@@ -73,10 +79,10 @@ const Register = () => {
               onChange={(e)=>setUserDetails({...userDetails,username:e.target.value})}
             />
           </div>
-          <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
+          <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5 text-gray-400"
+              className="h-5 w-5 text-gray-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -89,7 +95,7 @@ const Register = () => {
               />
             </svg>
             <input
-              class="pl-2 outline-none border-none"
+              className="pl-2 outline-none border-none"
               type="email"
               name="email"
               value={userDetails.email}
@@ -98,10 +104,10 @@ const Register = () => {
               onChange={(e)=>setUserDetails({...userDetails,email:e.target.value})}
             />
           </div>
-          <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
+          <div className="flex items-center border-2 py-2 px-3 rounded-2xl">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5 text-gray-400"
+              className="h-5 w-5 text-gray-400"
               viewBox="0 0 20 20"
               fill="currentColor"
             >
@@ -112,7 +118,7 @@ const Register = () => {
               />
             </svg>
             <input
-              class="pl-2 outline-none border-none"
+              className="pl-2 outline-none border-none"
               type="password"
               name="password"
               value={userDetails.password}
@@ -123,7 +129,7 @@ const Register = () => {
           </div>
           <button
             type="submit"
-            class="block w-full bg-sky-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
+            className="block w-full bg-sky-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
           >
             Register
           </button>

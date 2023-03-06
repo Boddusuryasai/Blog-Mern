@@ -49,20 +49,20 @@ const BlogDetails = () => {
         </div>
       )}
       {post && (
-        <section class="text-gray-600 body-font">
-          <div class="container mx-auto flex px-5 py-5 items-center justify-center flex-col">
+        <section className="text-gray-600 body-font">
+          <div className="container mx-auto flex px-5 py-5 items-center justify-center flex-col">
             <img
-              class="lg:w-2/3 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded"
+              className="lg:w-2/3 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded"
               alt="hero"
               src={post.cover}
             />
-            <div class="text-left lg:w-2/3 w-full">
-              <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
+            <div className="text-left lg:w-2/3 w-full">
+              <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
                 {post.title}
               </h1>
               <p className=" text-xs text-gray-600">{post.summary}</p>
               <p
-                class="mb-8 leading-relaxed"
+                className="mb-8 leading-relaxed"
                 dangerouslySetInnerHTML={{ __html: post.content }}
               ></p>
             </div>
