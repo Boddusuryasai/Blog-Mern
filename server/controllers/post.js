@@ -36,7 +36,8 @@ exports.createPost = async (req, res) => {
 exports.getPosts = async (req, res) => {
   try {
    
-    const posts = await Post.find();
+    const posts = await Post.find().populate('author', ['username'])
+    .sort({createdAt: -1});
     res.status(200).json({
       success: true,
       posts,
@@ -52,7 +53,7 @@ exports.getPosts = async (req, res) => {
 exports.getPost = async (req, res) => {
   try {
     const {id} = req.params
-    const posts = await Post.findById(id)
+    const posts = await Post.findById(id).populate('author', ['username'])
     console.log(posts);
     res.status(200).json({
       success: true,
