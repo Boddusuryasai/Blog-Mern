@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link ,useNavigate } from 'react-router-dom'
 import {ImBlogger} from "react-icons/im"
+import {AiOutlineLogout} from "react-icons/ai"
 
 const Header = () => {
   const navigate = useNavigate()
@@ -21,9 +22,11 @@ const Header = () => {
         <Link to="/Home/CreatePost">
           <div className='text-white font-semibold'>Create New Post</div>
         </Link>
-        <Link to="/" onClick={handleLogout}>
-        <div className='font-semibold text-white px-3 text-xl'>Logout</div>
-        </Link>
+        <div onClick={handleLogout}>
+        <AiOutlineLogout 
+            className="mr-2 text-white bg-sky-700  focus:outline-none hover:bg-sky-600 rounded-xl text-2xl"
+          ></AiOutlineLogout>
+        </div>
     </div>
   )
 }
