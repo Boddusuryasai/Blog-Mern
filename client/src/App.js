@@ -49,7 +49,7 @@ const appRouter = createBrowserRouter([
 ])
 function App() {
   return (
-    <div className="container mx-auto bg-slate-100 font-[Poppins]">
+    <div className="container mx-auto px-5 font-[Poppins]">
        <RouterProvider router={appRouter} />
     </div>
   );

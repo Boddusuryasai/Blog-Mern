@@ -90,31 +90,50 @@ const EditPost = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
+      <div className="grid gap-6 mb-6 md:grid-cols-2 p-4 ">
         <input
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           type="title"
           placeholder={"Title"}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <input
-          type="summary"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "type="summary"
           placeholder={"Summary"}
           value={summary}
           onChange={(e) => setSummary(e.target.value)}
         />
-        <input type="file" onChange={handleImgUpload} />
-        {img && <img src={imgPrev} alt="Uploaded file" />}
+        <div>
+          <label
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            htmlFor="file_input"
+          >
+            Upload file
+          </label>
+          <input
+            className="block  text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 w-full p-2.5 focus:outline-none "
+            id="file_input"
+            type="file" required
+            onChange={handleImgUpload}
+          />
+           <div >
+        {img && <img className="w-24 h-24" src={imgPrev} alt="Uploaded file" />}
+        </div>
+        </div>
+       
         <ReactQuill
           value={content}
-          modules={modules}
+          modules={modules} required
           onChange={(newValue) => setContent(newValue)}
         />
         <button className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 py-2 mt-3 text-white">
           CreatePost
         </button>
-      </form>
-    </div>
+      </div>
+    </form>
+  </div>
   );
 }
 

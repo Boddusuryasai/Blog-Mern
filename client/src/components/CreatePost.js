@@ -75,13 +75,13 @@ const CreatePost = () => {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             type="title"
             placeholder={"Title"}
-            value={title}
+            value={title} required
             onChange={(e) => setTitle(e.target.value)}
           />
           <input
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "type="summary"
             placeholder={"Summary"}
-            value={summary}
+            value={summary} required
             onChange={(e) => setSummary(e.target.value)}
           />
           <div>
@@ -94,7 +94,7 @@ const CreatePost = () => {
             <input
               className="block  text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 w-full p-2.5 focus:outline-none "
               id="file_input"
-              type="file"
+              type="file" required
               onChange={handleImgUpload}
             />
              <div >
@@ -104,7 +104,7 @@ const CreatePost = () => {
          
           <ReactQuill
             value={content}
-            modules={modules}
+            modules={modules} required
             onChange={(newValue) => setContent(newValue)}
           />
           <button className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 py-2 mt-3 text-white">

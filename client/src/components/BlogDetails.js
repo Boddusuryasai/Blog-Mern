@@ -50,6 +50,7 @@ const BlogDetails = () => {
             </div>
         
         }
+        
     </div>
   );
 };

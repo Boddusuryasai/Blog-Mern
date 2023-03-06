@@ -38,7 +38,7 @@ const BlogList = () => {
     <div>
       {posts && posts.map((post)=>{
          return  (<Link to={`/Home/Blog/${post._id}`}>
-         <BlogCard key={post._id} title={post.title} summary={post.summary} url={post.cover} content={post.content}/> </Link>)
+         <BlogCard key={post._id} {...post}/> </Link>)
       })}
         
     </div>
