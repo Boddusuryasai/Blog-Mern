@@ -22,6 +22,9 @@ const Header = () => {
         <Link to="/Home/CreatePost">
           <div className='text-white font-semibold text-xs sm:text-lg'>Create New Post</div>
         </Link>
+        <Link to="/Home/UserPosts">
+          <div className='text-white font-semibold text-xs sm:text-lg'>Your Posts</div>
+        </Link>
         <div onClick={handleLogout}>
         <AiOutlineLogout 
             className="mr-2 text-white bg-sky-700  focus:outline-none hover:bg-sky-600 rounded-xl text-2xl"

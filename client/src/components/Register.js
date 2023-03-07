@@ -65,7 +65,7 @@ const Register = () => {
               type="text"
               name="username"
               value={userDetails.username}
-              placeholder="username"
+              placeholder="username" autoComplete="off"
               onChange={(e)=>setUserDetails({...userDetails,username:e.target.value})}
             />
           </div>
@@ -78,9 +78,9 @@ const Register = () => {
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
               />
             </svg>
@@ -90,7 +90,7 @@ const Register = () => {
               name="email"
               value={userDetails.email}
               id="email"
-              placeholder="Email Address"
+              placeholder="Email Address" autoComplete="off"
               onChange={(e)=>setUserDetails({...userDetails,email:e.target.value})}
             />
           </div>
@@ -102,9 +102,9 @@ const Register = () => {
               fill="currentColor"
             >
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                clip-rule="evenodd"
+                clipRule="evenodd"
               />
             </svg>
             <input
@@ -113,7 +113,7 @@ const Register = () => {
               name="password"
               value={userDetails.password}
               id="password"
-              placeholder="Password"
+              placeholder="Password" autoComplete="off"
               onChange={(e)=>setUserDetails({...userDetails,password:e.target.value})}
             />
           </div>

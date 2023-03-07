@@ -22,15 +22,16 @@ const EditPost = () => {
         url: `/post/${params.id}`,
         headers: { "auth-token": data.token },
       });
-
       setTitle(res.data.posts.title);
       setSummary(res.data.posts.summary);
       setContent(res.data.posts.content);
+      setImgPrev(res.data.posts.cover)
       
     } catch (error) {
       console.log(error);
     }
 }
+
   useEffect(() => {
    
      getPost()
@@ -119,7 +120,7 @@ const EditPost = () => {
             onChange={handleImgUpload}
           />
            <div >
-        {img && <img className="w-24 h-24" src={imgPrev} alt="Uploaded file" />}
+        {<img className="w-24 h-24" src={imgPrev} alt="Uploaded file" /> }
         </div>
         </div>
        
@@ -129,7 +130,7 @@ const EditPost = () => {
           onChange={(newValue) => setContent(newValue)}
         />
         <button className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 py-2 mt-3 text-white">
-          CreatePost
+          UpdatePost
         </button>
       </div>
     </form>

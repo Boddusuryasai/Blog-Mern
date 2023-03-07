@@ -4,7 +4,7 @@ import BlogCard from './BlogCard'
 import { useEffect,useState } from 'react'
 import axios from 'axios'
 
-const BlogList = () => {
+const UserPosts = () => {
   const [posts ,setPosts] = useState([])
   const navigate = useNavigate()
   const data = JSON.parse(localStorage.getItem("data"));
@@ -17,7 +17,7 @@ const BlogList = () => {
     try {
       const res = await axios({
         method: "get",
-        url: `/posts`,
+        url: `/userposts`,
         headers: { "auth-token": data.token },
       });
      
@@ -45,4 +45,4 @@ const BlogList = () => {
   )
 }
 
-export default BlogList
+export default UserPosts

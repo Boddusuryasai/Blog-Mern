@@ -50,6 +50,25 @@ exports.getPosts = async (req, res) => {
     });
   }
 };
+exports.getUserPosts = async (req, res) => {
+  try {
+    console.log(req.user)
+    const authorId = req.user;
+    
+    const posts = await Post.find({ author: authorId }).populate('author', ['username'])
+    .sort({createdAt: -1});
+    res.status(200).json({
+      success: true,
+      posts,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(401).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
 exports.getPost = async (req, res) => {
   try {
     const {id} = req.params

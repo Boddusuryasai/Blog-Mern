@@ -5,7 +5,7 @@ const {
   getPosts,
   editPost,
   deletePost,
-  getPost
+  getPost,getUserPosts
   
 } = require("../controllers/post");
 const getAccountUser = require("../middleware/getAccountUser")
@@ -28,6 +28,7 @@ router.post("/signup",  [
 router.post("/post", getAccountUser , singleFileUpload,createPost);
 // router.get("/posts", getAllPosts);
 router.get("/posts",getAccountUser ,getPosts);
+router.get("/userposts",getAccountUser ,getUserPosts);
 router.get("/post/:id",getAccountUser ,getPost);
 router.put("/post/:id",getAccountUser,singleFileUpload, editPost);
 router.delete("/post/:id",getAccountUser, deletePost);

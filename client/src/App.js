@@ -13,6 +13,7 @@ import {
 } from "react-router-dom";
 import Main from './components/Main';
 import EditPost from './components/EditPost';
+import UserPosts from './components/UserPosts';
 const appRouter = createBrowserRouter([
   {
   path:"/",
@@ -42,6 +43,10 @@ const appRouter = createBrowserRouter([
       path:"CreatePost",
       element:<CreatePost/>
     },
+    {
+      path:"UserPosts",
+      element:<UserPosts/>
+    }
     
   ]
 }
@@ -49,7 +54,7 @@ const appRouter = createBrowserRouter([
 ])
 function App() {
   return (
-    <div className="container mx-auto px-5 font-[Poppins]">
+    <div className="container mx-auto font-[Poppins]">
        <RouterProvider router={appRouter} />
     </div>
   );
