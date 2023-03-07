@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import BlogCard from './BlogCard'
 import { useEffect,useState } from 'react'
-import axios from 'axios'
+import { ThreeDots } from 'react-loader-spinner';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPostsAsync } from "../Redux/PostsSlice"
 
@@ -21,7 +21,11 @@ const UserPosts = () => {
   }, [dispatch, data.token]);
 
   if (status === 'loading') {
-    return <div>Loading...</div>;
+    return (
+        <div className="flex items-center justify-center h-screen">
+          <ThreeDots color="#00BFFF" height={80} width={80} />
+        </div>
+      );
   }
 
   if (status === 'failed') {
