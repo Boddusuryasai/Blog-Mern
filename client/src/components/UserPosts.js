@@ -3,9 +3,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import BlogCard from './BlogCard'
 import { useEffect,useState } from 'react'
 import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux';
+import { getPostsAsync } from "../Redux/PostsSlice"
 
 const UserPosts = () => {
-  const [posts ,setPosts] = useState([])
+    const dispatch = useDispatch();
+    const { posts, status, error } = useSelector(state => state.posts);
   const navigate = useNavigate()
   const data = JSON.parse(localStorage.getItem("data"));
   useEffect(() => {
@@ -13,26 +16,18 @@ const UserPosts = () => {
      navigate("/")
    }
   }, [])
-  const getPosts = async () => {
-    try {
-      const res = await axios({
-        method: "get",
-        url: `/userposts`,
-        headers: { "auth-token": data.token },
-      });
-     
-     setPosts([...res.data.posts])
-      
-    } catch (error) {
-      console.log(error);
-    }
-  
-   
-  };
-  useEffect(()=>{
-    getPosts()
-      
-  },[])
+  useEffect(() => {
+    dispatch(getPostsAsync(data.token));
+  }, [dispatch, data.token]);
+
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
+
+  if (status === 'failed') {
+    return <div>{error}</div>;
+  }
+
   
   return (
     <div>
