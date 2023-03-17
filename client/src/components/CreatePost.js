@@ -3,6 +3,7 @@ import ReactQuill from "react-quill";
 import axios from "axios";
 import "react-quill/dist/quill.snow.css";
 import { useNavigate } from "react-router-dom";
+import { BASEURL } from '../constants'
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
@@ -18,7 +19,7 @@ const CreatePost = () => {
     try {
       const res = await axios({
         method: "post",
-        url: `/post`,
+        url: `${BASEURL}/post`,
         data: formData,
         headers: { "auth-token": data.token },
       });

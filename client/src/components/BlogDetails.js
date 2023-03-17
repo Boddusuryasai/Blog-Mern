@@ -5,6 +5,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import {AiFillEdit} from "react-icons/ai";
 import { ThreeDots } from 'react-loader-spinner';
+import { BASEURL } from '../constants'
 
 const BlogDetails = () => {
   const [post, setPost] = useState(null);
@@ -14,7 +15,7 @@ const BlogDetails = () => {
     try {
       const res = await axios({
         method: "get",
-        url: `/post/${params.id}`,
+        url: `${BASEURL}/post/${params.id}`,
         headers: { "auth-token": data.token },
       });
 
@@ -26,7 +27,7 @@ const BlogDetails = () => {
   useEffect(() => {
     getPost();
   }, []);
-  
+
   //Early return
   if(post===null){
     return (

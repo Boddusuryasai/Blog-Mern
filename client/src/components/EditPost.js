@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import ReactQuill from "react-quill";
 import axios from "axios";
 import "react-quill/dist/quill.snow.css";
+import { BASEURL } from '../constants'
 const EditPost = () => {
   const params = useParams();
   const { id } = params;
@@ -19,7 +20,7 @@ const EditPost = () => {
     try {
       const res = await axios({
         method: "get",
-        url: `/post/${params.id}`,
+        url: `${BASEURL}/post/${params.id}`,
         headers: { "auth-token": data.token },
       });
       setTitle(res.data.posts.title);

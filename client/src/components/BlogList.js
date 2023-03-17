@@ -4,11 +4,13 @@ import BlogCard from './BlogCard'
 import { useEffect,useState } from 'react'
 import axios from 'axios'
 import { ThreeDots } from 'react-loader-spinner';
+import { BASEURL } from '../constants'
 
 const BlogList = () => {
   const [posts ,setPosts] = useState([])
   const navigate = useNavigate()
   const data = JSON.parse(localStorage.getItem("data"));
+  console.log(data.token);
   useEffect(() => {
    if(!localStorage.getItem("data")){
      navigate("/")
@@ -18,7 +20,7 @@ const BlogList = () => {
     try {
       const res = await axios({
         method: "get",
-        url: `/posts`,
+        url: `${BASEURL}/posts`,
         headers: { "auth-token": data.token },
       });
      

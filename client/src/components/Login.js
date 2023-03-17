@@ -2,6 +2,7 @@ import React, { useState , useEffect } from "react";
 import axios from "axios";
 import { useNavigate ,Link } from "react-router-dom";
 import {ImBlogger} from "react-icons/im"
+import { BASEURL } from '../constants'
 
 const Login = () => {
   const [userDetails, setUserDetails] = useState({
@@ -12,7 +13,7 @@ const Login = () => {
   const submitData = () => {
     
     axios
-      .post(`/login`, userDetails)
+      .post(`${BASEURL}/login`, userDetails)
       .then((response) => {
         localStorage.setItem("data", JSON.stringify(response.data));
         navigate("/Home/Blog");

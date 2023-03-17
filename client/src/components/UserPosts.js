@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import BlogCard from './BlogCard'
-import { useEffect,useState } from 'react'
+import { useEffect} from 'react'
 import { ThreeDots } from 'react-loader-spinner';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPostsAsync } from "../Redux/PostsSlice"
@@ -15,7 +15,7 @@ const UserPosts = () => {
    if(!localStorage.getItem("data")){
      navigate("/")
    }
-  }, [])
+  },[])
   useEffect(() => {
     dispatch(getPostsAsync(data.token));
   }, [dispatch, data.token]);

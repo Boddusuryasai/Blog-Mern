@@ -1,10 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { BASEURL } from '../constants'
 
 export const getPostsAsync = createAsyncThunk(
   'posts/getPostsAsync',
   async (token) => {
-    const res = await axios.get('/userposts', {
+    const res = await axios.get(`${BASEURL}/userposts`, {
       headers: { "auth-token": token },
     });
     return res.data.posts;

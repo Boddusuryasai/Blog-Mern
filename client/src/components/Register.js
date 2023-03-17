@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate , Link } from "react-router-dom";
 import {ImBlogger} from "react-icons/im"
 import {AiOutlineUser} from "react-icons/ai"
+import { BASEURL } from '../constants'
 const Register = () => {
   const [userDetails, setUserDetails] = useState({
     username: "",
@@ -17,7 +18,7 @@ const Register = () => {
   const submitData = () => {
     
     axios
-      .post(`/signup`, userDetails)
+      .post(`${BASEURL}/signup`, userDetails)
       .then((response) => {
         localStorage.setItem("data", JSON.stringify(response.data));
         navigate("/Home/Blog");

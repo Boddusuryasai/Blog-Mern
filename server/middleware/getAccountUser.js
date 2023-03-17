@@ -12,7 +12,7 @@ const getAccountUser = (req, res, next) => {
         req.user = data.id;
         next();
     } catch (error) {
-        res.status(401).send({ error: "Please authenticate using a valid token" })
+        res.status(401).send(error)
     }
 
 }
