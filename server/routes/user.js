@@ -27,7 +27,7 @@ router.post("/signup",  [
   ],signup)
 router.post("/post", getAccountUser , singleFileUpload,createPost);
 // router.get("/posts", getAllPosts);
-router.get("/posts" ,getPosts);
+router.get("/posts" ,getAccountUser,getPosts);
 router.get("/userposts",getAccountUser ,getUserPosts);
 router.get("/post/:id",getAccountUser ,getPost);
 router.put("/post/:id",getAccountUser,singleFileUpload, editPost);
