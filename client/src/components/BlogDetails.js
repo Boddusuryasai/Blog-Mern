@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import {AiFillEdit} from "react-icons/ai"
+import {AiFillEdit} from "react-icons/ai";
+import { ThreeDots } from 'react-loader-spinner';
 
 const BlogDetails = () => {
   const [post, setPost] = useState(null);
@@ -25,6 +26,14 @@ const BlogDetails = () => {
   useEffect(() => {
     getPost();
   }, []);
+  
+  //Early return
+  if(post===null){
+    return (
+    <div className="flex items-center justify-center h-screen">
+    <ThreeDots color="#00BFFF" height={80} width={80} />
+  </div> )
+  }
   return (
     <div>
       {post && (

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import BlogCard from './BlogCard'
 import { useEffect,useState } from 'react'
 import axios from 'axios'
+import { ThreeDots } from 'react-loader-spinner';
 
 const BlogList = () => {
   const [posts ,setPosts] = useState([])
@@ -33,7 +34,13 @@ const BlogList = () => {
     getPosts()
       
   },[])
-  
+  if(posts.length===0){
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <ThreeDots color="#00BFFF" height={80} width={80} />
+      </div>
+    );
+  }
   return (
     <div>
       {posts && posts.map((post)=>{
