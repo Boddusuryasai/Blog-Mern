@@ -36,7 +36,7 @@ const BlogDetails = () => {
   </div> )
   }
   return (
-    <div>
+    <div className="mt-24">
       {post && (
         <section className="text-gray-600 body-font">
           <div className="container mx-auto flex  py-5 items-center justify-center flex-col">

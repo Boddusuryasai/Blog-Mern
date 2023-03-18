@@ -12,7 +12,7 @@ const Header = () => {
 
   }
   return (
-    <div className='flex justify-between py-5 items-center shadow-xl bg-gradient-to-r from-cyan-500 to-blue-500' >
+    <div className='fixed w-full z-50  top-0 flex justify-between py-5 items-center shadow-xl bg-gradient-to-r from-cyan-500 to-blue-500' >
         <Link to="/Home/Blog">
         <div className='flex items-center ml-2 sm:px-2 py-1 gap-1 text-white  rounded-lg'>
           <ImBlogger size={"1.3rem"}></ImBlogger>

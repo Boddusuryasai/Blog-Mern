@@ -44,7 +44,7 @@ const BlogList = () => {
     );
   }
   return (
-    <div>
+    <div className='mt-24'>
       {posts && posts.map((post)=>{
          return  (<Link to={`/Home/Blog/${post._id}`} key={post._id}>
          <BlogCard key={post._id} {...post}/> </Link>)

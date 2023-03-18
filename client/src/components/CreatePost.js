@@ -69,7 +69,7 @@ const CreatePost = () => {
   };
 
   return (
-    <div>
+    <div className="mt-24">
       <form onSubmit={handleSubmit}>
         <div className="grid gap-6 mb-6 md:grid-cols-2 p-4 ">
           <input
