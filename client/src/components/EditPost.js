@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import ReactQuill from "react-quill";
 import axios from "axios";
 import "react-quill/dist/quill.snow.css";
-import { BASEURL } from '../constants'
+import { BASEURL } from '../constants';
+import { ThreeDots } from 'react-loader-spinner';
 const EditPost = () => {
   const params = useParams();
   const { id } = params;
@@ -91,8 +92,14 @@ const EditPost = () => {
   };
  
   return (
-    <div className="mt-24">
-    <form onSubmit={handleSubmit}>
+    <div className="relative mt-24">
+      {isSubmitting && (
+        <div className="fixed top-0 left-0 w-full h-full bg-slate-50 opacity-50 flex justify-center items-center">
+          <ThreeDots color="#00BFFF" height={80} width={80} />
+        </div>
+      )}
+      <form onSubmit={handleSubmit} className={isSubmitting ? "opacity-50" : ""}>
+    
       <div className="grid gap-6 mb-6 md:grid-cols-2 p-4 ">
         <input
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -135,6 +142,7 @@ const EditPost = () => {
         </button>
       </div>
     </form>
+    
   </div>
   );
 }
