@@ -41,7 +41,7 @@ const EditPost = () => {
     try {
       const res = await axios({
         method: "put",
-        url: `/post/${id}`,
+        url: `${BASEURL}/post/${id}`,
         data: formData,
         headers: { "auth-token": data.token },
       });
