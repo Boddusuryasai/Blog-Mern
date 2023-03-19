@@ -137,7 +137,7 @@ const EditPost = () => {
           modules={modules} required
           onChange={(newValue) => setContent(newValue)}
         />
-        <button className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 py-2 mt-3 text-white">
+        <button className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 py-2 md:mt-12 text-white">
           UpdatePost
         </button>
       </div>

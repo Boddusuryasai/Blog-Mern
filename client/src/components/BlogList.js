@@ -10,7 +10,6 @@ const BlogList = () => {
   const [posts ,setPosts] = useState([])
   const navigate = useNavigate()
   const data = JSON.parse(localStorage.getItem("data"));
-  console.log(data.token);
   useEffect(() => {
    if(!localStorage.getItem("data")){
      navigate("/")

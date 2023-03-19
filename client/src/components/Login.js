@@ -9,6 +9,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const submitData = () => {
     
@@ -19,12 +20,13 @@ const Login = () => {
         navigate("/Home/Blog");
       })
       .catch((error) => {
-        console.log(error);
+        setError(error.response.data)
       });
   };
+ 
+
   useEffect(()=>{
     if(localStorage.getItem("data") !== null && localStorage.getItem("data") !== undefined && localStorage.getItem("data") !== "undefined"){
-      
       const data = JSON.parse(localStorage.getItem("data"));
     if(data?.token!=null) {navigate("/Home/Blog")}
     }
@@ -54,6 +56,7 @@ const Login = () => {
     <form className="bg-white" onSubmit={(e)=>handleSubmit(e)}>
       <h1 className="text-gray-800 font-bold text-2xl mb-1">Hello Again!</h1>
       <p className="text-sm font-normal text-gray-600 mb-7">Welcome Back</p>
+      {error && <p className="text-red-500">{error}</p>}
       <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
