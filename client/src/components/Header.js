@@ -27,7 +27,7 @@ const Header = () => {
         </Link>
         <div onClick={handleLogout}>
         <AiOutlineLogout 
-            className="mr-2 text-white bg-sky-700  focus:outline-none hover:bg-sky-600 rounded-xl text-2xl"
+            className="mr-2 text-white cursor-pointer bg-sky-700  focus:outline-none hover:bg-sky-600 rounded-xl text-2xl"
           ></AiOutlineLogout>
         </div>
     </div>
