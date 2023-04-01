@@ -5,6 +5,8 @@ import { useEffect,useState } from 'react'
 import axios from 'axios'
 import { ThreeDots } from 'react-loader-spinner';
 import { BASEURL } from '../constants'
+import WithScrollPosition from "../hoc/WithScrollPosition"
+
 
 const BlogList = () => {
   const [posts ,setPosts] = useState([])
@@ -53,4 +55,4 @@ const BlogList = () => {
   )
 }
 
-export default BlogList
+export default WithScrollPosition(BlogList);

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import {AiFillEdit} from "react-icons/ai";
 import { ThreeDots } from 'react-loader-spinner';
 import { BASEURL } from '../constants'
+import WithScrollPosition from "../hoc/WithScrollPosition"
 
 const BlogDetails = () => {
   const [post, setPost] = useState(null);
@@ -67,4 +68,4 @@ const BlogDetails = () => {
   );
 };
 
-export default BlogDetails;
+export default WithScrollPosition(BlogDetails);
