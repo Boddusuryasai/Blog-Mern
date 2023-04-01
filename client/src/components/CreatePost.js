@@ -104,7 +104,7 @@ const CreatePost = () => {
               type="file" required
               onChange={handleImgUpload}
             />
-             <div >
+          <div >
           {img && <img className="w-24 h-24" src={imgPrev} alt="Uploaded file" />}
           </div>
           </div>
@@ -113,10 +113,13 @@ const CreatePost = () => {
             value={content}
             modules={modules} required
             onChange={(newValue) => setContent(newValue)}
+            className="mb-16 md:mb-0"
           />
-          <button className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 py-2 md:mt-12 text-white">
+          
+          <button className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 py-2  text-white">
             CreatePost
           </button>
+         
         </div>
       </form>
     </div>
