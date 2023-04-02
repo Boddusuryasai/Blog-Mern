@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams ,useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -12,6 +12,12 @@ const BlogDetails = () => {
   const [post, setPost] = useState(null);
   const data = JSON.parse(localStorage.getItem("data"));
   const params = useParams();
+  const navigate = useNavigate()
+  useEffect(() => {
+   if(!localStorage.getItem("data")){
+     navigate("/")
+   }
+  }, [])
   const getPost = async () => {
     try {
       const res = await axios({

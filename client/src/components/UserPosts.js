@@ -12,13 +12,16 @@ const UserPosts = () => {
   const navigate = useNavigate()
   const data = JSON.parse(localStorage.getItem("data"));
   useEffect(() => {
-   if(!localStorage.getItem("data")){
-     navigate("/")
-   }
-  },[])
-  useEffect(() => {
-    dispatch(getPostsAsync(data.token));
-  }, [dispatch, data.token]);
+    if(!data){
+        navigate("/")
+    }
+},[data, navigate])
+
+useEffect(() => {
+    if(data){
+        dispatch(getPostsAsync(data.token));
+    }
+}, [dispatch, data?.token]);
 
   if (status === 'loading') {
     return (

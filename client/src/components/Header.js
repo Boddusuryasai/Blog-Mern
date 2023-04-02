@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link ,useNavigate } from 'react-router-dom'
 import {ImBlogger} from "react-icons/im"
 import {AiOutlineLogout} from "react-icons/ai"
 
 const Header = () => {
+  const [isVisible , setIsVisible] = useState(false)
   const navigate = useNavigate()
 
   const handleLogout =()=>{
@@ -25,10 +26,12 @@ const Header = () => {
         <Link to="/Home/UserPosts">
           <div className='text-white font-semibold text-xs sm:text-lg'>Your Posts</div>
         </Link>
-        <div onClick={handleLogout}>
+        <div className='relative' >
         <AiOutlineLogout 
-            className="mr-2 text-white cursor-pointer bg-sky-700  focus:outline-none hover:bg-sky-600 rounded-xl text-2xl"
-          ></AiOutlineLogout>
+            className="mr-2 text-white cursor-pointer bg-gradient-to-r from-cyan-500 to-blue-500 focus:outline-none hover:bg-sky-600 rounded-xl text-2xl"
+          onClick={()=>setIsVisible(!isVisible)}></AiOutlineLogout>
+          {isVisible && <button className=' absolute right-2 p-2 bg-gradient-to-r from-cyan-500 to-blue-500 border-none text-white rounded-2xl text-xs sm:text-lg font-semibold' onClick={handleLogout}>Logout</button>
+}
         </div>
     </div>
   )

@@ -17,6 +17,11 @@ const EditPost = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const data = JSON.parse(localStorage.getItem("data"));
   const navigate = useNavigate();
+  useEffect(() => {
+   if(!localStorage.getItem("data")){
+     navigate("/")
+   }
+  }, [])
   const getPost = async () => {
     try {
       const res = await axios({

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect } from "react";
 import ReactQuill from "react-quill";
 import axios from "axios";
 import "react-quill/dist/quill.snow.css";
@@ -15,7 +15,11 @@ const CreatePost = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const data = JSON.parse(localStorage.getItem("data"));
   const navigate = useNavigate();
-
+  useEffect(() => {
+   if(!localStorage.getItem("data")){
+     navigate("/")
+   }
+  }, [])
   const createPost = async (formData) => {
     try {
       const res = await axios({
@@ -68,7 +72,7 @@ const CreatePost = () => {
       ["clean"],
     ],
   };
-
+  
   return (
     <div className="relative mt-24">
       {isSubmitting && (
