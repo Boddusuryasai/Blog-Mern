@@ -5,6 +5,14 @@ const postSchema= new mongoose.Schema({
   content:String,
   cover:String,
   author:{type:mongoose.Schema.Types.ObjectId, ref:'user'},
+  likes: [
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    },
+  ]
 }, {
   timestamps: true,
 });

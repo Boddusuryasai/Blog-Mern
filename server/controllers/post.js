@@ -140,3 +140,37 @@ exports.deletePost = async (req, res) => {
     });
   }
 };
+
+
+
+exports.likePost = async (req, res) => {
+  const  postId  = req.params.id;
+  const { user } = req;
+  try {
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+
+    const existingLike = post.likes.find(
+      (like) => like.user.toString() === user,
+    );
+
+    if (existingLike) {
+      post.likes = post.likes.filter(
+        (like) => like.user.toString() !== user,
+      );
+    } else {
+      post.likes.push({ user: user });
+    }
+
+    await post.save();
+
+    res.status(200).json(post.likes);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
