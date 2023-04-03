@@ -3,6 +3,7 @@ import React  from "react";
 import axios from "axios"
 import {FcLikePlaceholder} from "react-icons/fc";
 import {FcLike} from "react-icons/fc"
+import { BASEURL } from "../constants";
 
 const BlogCard = ({title,summary,cover,author ,createdAt ,likes ,_id}) => {
   const data = JSON.parse(localStorage.getItem("data"));
@@ -13,7 +14,7 @@ const BlogCard = ({title,summary,cover,author ,createdAt ,likes ,_id}) => {
       setLiked(!liked);
       const res = await axios({
         method: "post",
-        url: `http://localhost:4000/likes/${_id}`,
+        url: `${BASEURL}/likes/${_id}`,
         headers: { "auth-token": data.token },
       });
       
