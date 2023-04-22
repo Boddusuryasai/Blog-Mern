@@ -1,1 +1,1 @@
-export const BASEURL = "https://blog-mern-production-2d75.up.railway.app"
+export const BASEURL = "https://blog-74np.onrender.com"
