@@ -11,6 +11,7 @@ const Register = () => {
     password: "",
   });
   const [error, setError] = useState(null);
+  const[isLoading,setIsLoading] = useState(false)
   const navigate = useNavigate();
   const submitData = () => {
     
@@ -18,16 +19,19 @@ const Register = () => {
       .post(`${BASEURL}/signup`, userDetails)
       .then((response) => {
         localStorage.setItem("data", JSON.stringify(response.data));
+        setIsLoading(false)
         navigate("/Home/Blog");
       })
       .catch((error) => {
         setError(error.response.data.msg)
+        setIsLoading(false)
       });
   };
   // To handle the Default
   const handleSubmit = (event) => {
     event.preventDefault();
     // To submit the Data
+    setIsLoading(true)
     submitData();
   };
 
@@ -109,7 +113,7 @@ const Register = () => {
             />
           </div>
           <button
-            type="submit"
+            type="submit" disabled={isLoading}
             className="block w-full bg-sky-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
           >
             Register

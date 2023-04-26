@@ -9,6 +9,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const[isLoading,setIsLoading] = useState(false)
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const submitData = () => {
@@ -17,10 +18,12 @@ const Login = () => {
       .post(`${BASEURL}/login`, userDetails)
       .then((response) => {
         localStorage.setItem("data", JSON.stringify(response.data));
+        setIsLoading(false)
         navigate("/Home/Blog");
       })
       .catch((error) => {
-        setError(error.response.data)
+        setError(error?.response?.data)
+        setIsLoading(false)
       });
   };
  
@@ -35,6 +38,7 @@ const Login = () => {
   // To handle the Default
   const handleSubmit = (event) => {
     event.preventDefault();
+    setIsLoading(true)
     // To submit the Data
     submitData();
   };
@@ -79,7 +83,7 @@ const Login = () => {
        onChange={(e)=>setUserDetails({...userDetails,password:e.target.value})}
      />
       </div>
-      <button type="submit" className="block w-full bg-sky-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2">Login</button>
+      <button type="submit" disabled={isLoading} className="block w-full bg-sky-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2">Login</button>
       <Link to="/register">
       <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer">Dont have an account ?</span>
       </Link>
