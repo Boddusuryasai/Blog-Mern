@@ -37,6 +37,7 @@ const CommentsList = ({comments})=>{
 }
 const BlogDetails = () => {
   const [post, setPost] = useState(null);
+  const [comment,setComment] = useState("")
   const data = JSON.parse(localStorage.getItem("data"));
   const params = useParams();
   const navigate = useNavigate()
@@ -62,7 +63,23 @@ const BlogDetails = () => {
   useEffect(() => {
     getPost();
   }, []);
+   const addComment = async(comment,model,targetId)=>{
+    try {
+      const res = await axios
+      .post(`http://localhost:4000/addcomment`, 
+        {
+          "onModel":model,
+           "content":comment,
+           "targetId":targetId,
+           "comments":[]
+      },{ headers: { "auth-token": data.token }})
+      getPost()
+    } catch (error) {
+      console.log(error)
+    }
+    
 
+   }
   //Early return
   if(post===null){
     return (
@@ -99,6 +116,11 @@ const BlogDetails = () => {
             <div className="flex ">
             </div>
             <div className="lg:w-2/3">
+              <div>
+                <input type="text" value={comment} onChange={(e)=>setComment(e.target.value)}
+                ></input>
+                <button onClick={()=>addComment(comment,"Post",params.id)}>comment</button>
+              </div>
             <CommentsList comments={post?.comments}/>
             </div>
           </div>

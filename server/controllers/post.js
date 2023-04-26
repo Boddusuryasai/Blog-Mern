@@ -233,13 +233,12 @@ exports.addComment = async(req,res)=>{
     });
 
     const savedComment = await newComment.save();
-    console.log(savedComment );
     target.comments.push(savedComment);
     await target.save();
-    console.log(target)
     res.status(200).json({success:true,message:"comment created Successfully"})
   }
   catch(error){
+    console.log(error)
     res.status(401).json({
       success: false,
       message: error.message,

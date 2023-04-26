@@ -24,7 +24,6 @@ const BlogList = () => {
         url: `http://localhost:4000/posts`,
         headers: { "auth-token": data.token },
       });
-     console.log(res.data.posts);
      setPosts([...res.data.posts])
       
     } catch (error) {

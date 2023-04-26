@@ -76,7 +76,7 @@ const BlogCard = ({
             <span className="text-gray-400">likes-{count} </span>
             {liked ? <FcLike size={20} /> : <FcLikePlaceholder size={20} />}
           </button>
-          <div> Comments - {countComments(comments)}</div>
+          <div> Comments - </div>
         </div>
       </div>
     </div>
