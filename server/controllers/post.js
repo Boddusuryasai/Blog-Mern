@@ -76,10 +76,16 @@ exports.getPost = async (req, res) => {
     const posts = await Post.findById(id).populate('author', ['username']).populate({
       path: 'comments',
       populate: {
-          path: 'comments'
-      }
-  }).lean();
-    console.log(posts);
+        path: 'comments',
+        populate: {
+          path: 'author',
+          select: 'username',
+        },
+      },
+      options: { sort: { createdAt: -1 } },
+    });
+    
+    
     res.status(200).json({
       success: true,
       posts,
@@ -193,10 +199,10 @@ exports.addComment = async(req,res)=>{
       }
     const newComment = new Comment({
       content,
-      userId,
+     author: userId,
       onModel,
       target:targetId,
-      replies: []
+      comments: []
     });
 
     const savedComment = await newComment.save();

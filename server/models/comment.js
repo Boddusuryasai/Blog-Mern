@@ -5,9 +5,9 @@ const commentSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    userId: {
+    author: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'user',
         required: true
     },
     onModel: {

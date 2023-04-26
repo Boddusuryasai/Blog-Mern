@@ -7,7 +7,34 @@ import {AiFillEdit} from "react-icons/ai";
 import { ThreeDots } from 'react-loader-spinner';
 import { BASEURL } from '../constants'
 import WithScrollPosition from "../hoc/WithScrollPosition"
-
+const Comment =({comments})=>{
+  return (
+      <div className='flex items-center w-full border p-3 gap-2 bg-slate-100'>
+          <div className="w-10 h-10 rounded-full bg-gray-300"></div>
+          <div>
+              <h1 className='font-bold text-gray-800'>{comments?.userId?.username} </h1>
+              <p className='font-medium text-gray-600'>{comments?.content}</p>
+              
+          </div>
+      </div>
+  )
+}
+const CommentsList = ({comments})=>{
+  return (
+      
+          comments?.map((comment,i)=>{
+              return (
+                  <div key={i} className="mt-1">
+                      <Comment comments={comment} />
+                      <div className='ml-4'>
+                          <CommentsList comments={comment.comments}/>
+                      </div>
+                  </div>
+              )
+          })
+      
+  )
+}
 const BlogDetails = () => {
   const [post, setPost] = useState(null);
   const data = JSON.parse(localStorage.getItem("data"));
@@ -27,6 +54,7 @@ const BlogDetails = () => {
       });
 
       setPost(res.data.posts);
+      console.log(res.data.posts)
     } catch (error) {
       console.log(error);
     }
@@ -42,6 +70,7 @@ const BlogDetails = () => {
     <ThreeDots color="#00BFFF" height={80} width={80} />
   </div> )
   }
+
   return (
     <div className="mt-24">
       {post && (
@@ -66,6 +95,11 @@ const BlogDetails = () => {
                 className="mb-8 leading-relaxed "
                 dangerouslySetInnerHTML={{ __html: post.content }}
               ></p>
+            </div>
+            <div className="flex ">
+            </div>
+            <div className="lg:w-2/3">
+            <CommentsList comments={post?.comments}/>
             </div>
           </div>
         </section>
