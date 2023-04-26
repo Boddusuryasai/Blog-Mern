@@ -72,23 +72,49 @@ exports.getUserPosts = async (req, res) => {
 };
 exports.getPost = async (req, res) => {
   try {
-    const {id} = req.params
-    const posts = await Post.findById(id).populate('author', ['username']).populate({
-      path: 'comments',
-      populate: {
-        path: 'comments',
+    const { id } = req.params;
+    const post = await Post.findById(id)
+      .populate("author", ["username"])
+      .populate({
+        path: "comments",
         populate: {
-          path: 'author',
-          select: 'username',
+          path: "author",
+          select: "username",
         },
-      },
-      options: { sort: { createdAt: -1 } },
-    });
-    
-    
+        options: { sort: { createdAt: -1 } },
+      })
+      .lean();
+
+    function populateNestedComments(comments) {
+      return Promise.all(
+        comments.map(async (comment) => {
+          if (comment.comments && comment.comments.length > 0) {
+            comment.comments = await populateNestedComments(
+              await Comment.find({ _id: { $in: comment.comments } })
+                .populate({
+                  path: "author",
+                  select: "username",
+                })
+                .populate({
+                  path: "comments",
+                  populate: {
+                    path: "author",
+                    select: "username",
+                  },
+                })
+                .lean()
+            );
+          }
+          return comment;
+        })
+      );
+    }
+
+    await populateNestedComments(post.comments);
+
     res.status(200).json({
       success: true,
-      posts,
+      post,
     });
   } catch (error) {
     console.log(error);
@@ -98,6 +124,7 @@ exports.getPost = async (req, res) => {
     });
   }
 };
+
 exports.editPost = async (req, res) => {
   try {
     const {  title,
