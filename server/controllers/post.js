@@ -1,5 +1,6 @@
 
 const Post = require("../models/post");
+const Comment = require("../models/comment")
 const getDataUri = require("../utils/dataUri")
 const cloudinary = require("cloudinary")
 exports.home = (req, res) => {
@@ -72,7 +73,12 @@ exports.getUserPosts = async (req, res) => {
 exports.getPost = async (req, res) => {
   try {
     const {id} = req.params
-    const posts = await Post.findById(id).populate('author', ['username'])
+    const posts = await Post.findById(id).populate('author', ['username']).populate({
+      path: 'comments',
+      populate: {
+          path: 'comments'
+      }
+  }).lean();
     console.log(posts);
     res.status(200).json({
       success: true,
@@ -174,3 +180,38 @@ exports.likePost = async (req, res) => {
   }
 };
 
+exports.addComment = async(req,res)=>{
+  try {
+    const { content, onModel, targetId } = req.body;
+    const userId = req.user
+    if(onModel == 'Post') {
+      var target = await Post.findById(targetId).select("-content");
+      } else if(onModel == 'Comment') {
+          var  target = await Comment.findById( targetId);
+      } else {
+          throw new Error('unknown model to post comment');
+      }
+    const newComment = new Comment({
+      content,
+      userId,
+      onModel,
+      target:targetId,
+      replies: []
+    });
+
+    const savedComment = await newComment.save();
+    console.log(savedComment );
+    target.comments.push(savedComment);
+    await target.save();
+    console.log(target)
+    res.status(200).json({success:true,message:"comment created Successfully"})
+  }
+  catch(error){
+    res.status(401).json({
+      success: false,
+      message: error.message,
+    });
+  }
+
+
+}

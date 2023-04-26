@@ -5,7 +5,7 @@ const {
   getPosts,
   editPost,
   deletePost,
-  getPost,getUserPosts, likePost
+  getPost,getUserPosts, likePost, addComment
   
 } = require("../controllers/post");
 const getAccountUser = require("../middleware/getAccountUser")
@@ -26,6 +26,7 @@ router.post("/signup",  [
     body('password', 'Password must be atleast 5 characters').isLength({ min: 5 }),
   ],signup)
 router.post("/post", getAccountUser , singleFileUpload,createPost);
+router.post("/addcomment", getAccountUser ,addComment);
 // router.get("/posts", getAllPosts);
 router.get("/posts" ,getAccountUser,getPosts);
 router.get("/userposts",getAccountUser ,getUserPosts);
