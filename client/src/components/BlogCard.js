@@ -5,19 +5,21 @@ import {FcLikePlaceholder} from "react-icons/fc";
 import {FcLike} from "react-icons/fc"
 import { BASEURL } from "../constants";
 
-const BlogCard = ({title,summary,cover,author ,createdAt ,likes ,_id}) => {
+const BlogCard = ({title,summary,cover,author ,createdAt ,likes ,_id ,getPosts }) => {
   const data = JSON.parse(localStorage.getItem("data"));
   const [liked, setLiked] = useState(likes.find((a)=>a.user===data.id));
+  const [count,setCount] = useState(likes?.length || 0)
   const handleLike = async (e) => {
     e.preventDefault();
     try {
       setLiked(!liked);
+      liked?setCount(prevCount=>prevCount-1):setCount(prevCount=>prevCount+1)
       const res = await axios({
         method: "post",
         url: `${BASEURL}/likes/${_id}`,
         headers: { "auth-token": data.token },
       });
-      
+      getPosts()
     } catch (error) {
       console.log(error);
     }
@@ -44,7 +46,7 @@ const BlogCard = ({title,summary,cover,author ,createdAt ,likes ,_id}) => {
   <button
     className="flex items-center gap-2 py-1 px-2 rounded-md text-white focus:border-none"
     onClick={(event) => handleLike(event)}
-  >
+  > <span className="text-gray-400">likes-{count} </span>
     {liked ? <FcLike size={20} /> : <FcLikePlaceholder size={20} />}
   </button>
 </div>
