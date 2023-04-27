@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios"
 import { BsFillReplyFill } from "react-icons/bs";
+import { BASEURL } from "../constants";
 export default Comment =({comments,getPost})=>{
     const [isVisible,setIsvisible] = useState(false)
     const [reply,setReply] = useState("")
@@ -10,7 +11,7 @@ export default Comment =({comments,getPost})=>{
       e.preventDefault()
       try {
         const res = await axios
-        .post(`http://localhost:4000/addcomment`, 
+        .post(`${BASEURL}/addcomment`, 
           {
             "onModel":"Comment",
              "content":reply,

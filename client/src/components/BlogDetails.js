@@ -37,7 +37,7 @@ const BlogDetails = () => {
   const handleDelete =async()=>{
     try {
       const res = await axios
-      .delete(`http://localhost:4000/post/${params.id}`, 
+      .delete(`${BASEURL}/post/${params.id}`, 
       { headers: { "auth-token": data.token }})
       navigate("/")
     } catch (error) {
@@ -51,7 +51,7 @@ const BlogDetails = () => {
     e.preventDefault()
     try {
       const res = await axios
-      .post(`http://localhost:4000/addcomment`, 
+      .post(`${BASEURL}/addcomment`, 
         {
           "onModel":model,
            "content":comment,

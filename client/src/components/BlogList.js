@@ -21,7 +21,7 @@ const BlogList = () => {
     try {
       const res = await axios({
         method: "get",
-        url: `http://localhost:4000/posts`,
+        url: `${BASEURL}/posts`,
         headers: { "auth-token": data.token },
       });
      setPosts([...res.data.posts])
