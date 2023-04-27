@@ -37,12 +37,14 @@ const BlogCard = ({
     }
   };
   function countComments(comments) {
-    let count = comments.length;
+    let count = comments?.length || 0;
+    if(count>0){
     for (const comment of comments) {
       count += countComments(comment?.comments);
-    }
+    }}
     return count;
   }
+  let totalComments = countComments(comments)
   const niceDate = new Date(createdAt).toLocaleString("en-IN", {
     month: "long",
     day: "numeric",
@@ -76,7 +78,7 @@ const BlogCard = ({
             <span className="text-gray-400">likes-{count} </span>
             {liked ? <FcLike size={20} /> : <FcLikePlaceholder size={20} />}
           </button>
-          <div> Comments - </div>
+          <div> Comments -{totalComments} </div>
         </div>
       </div>
     </div>

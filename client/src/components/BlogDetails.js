@@ -3,38 +3,13 @@ import { useParams ,useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import {AiFillEdit} from "react-icons/ai";
+import {AiFillEdit } from "react-icons/ai";
+import {FaTrash} from "react-icons/fa"
 import { ThreeDots } from 'react-loader-spinner';
 import { BASEURL } from '../constants'
 import WithScrollPosition from "../hoc/WithScrollPosition"
-const Comment =({comments})=>{
-  return (
-      <div className='flex items-center w-full border p-3 gap-2 bg-slate-100'>
-          <div className="w-10 h-10 rounded-full bg-gray-300"></div>
-          <div>
-              <h1 className='font-bold text-gray-800'>{comments?.author?.username} </h1>
-              <p className='font-medium text-gray-600'>{comments?.content}</p>
-              
-          </div>
-      </div>
-  )
-}
-const CommentsList = ({comments})=>{
-  return (
-      
-          comments?.map((comment,i)=>{
-              return (
-                  <div key={i} className="mt-1">
-                      <Comment comments={comment} />
-                      <div className='ml-4'>
-                          <CommentsList comments={comment.comments}/>
-                      </div>
-                  </div>
-              )
-          })
-      
-  )
-}
+import CommentsList from "./CommentsList";
+
 const BlogDetails = () => {
   const [post, setPost] = useState(null);
   const [comment,setComment] = useState("")
@@ -55,15 +30,25 @@ const BlogDetails = () => {
       });
 
       setPost(res.data.post);
-      console.log(res.data.post)
     } catch (error) {
       console.log(error);
     }
   };
+  const handleDelete =async()=>{
+    try {
+      const res = await axios
+      .delete(`http://localhost:4000/post/${params.id}`, 
+      { headers: { "auth-token": data.token }})
+      navigate("/")
+    } catch (error) {
+      console.log(error)
+    }
+  }
   useEffect(() => {
     getPost();
   }, []);
-   const addComment = async(comment,model,targetId)=>{
+   const addComment = async(e,comment,model,targetId)=>{
+    e.preventDefault()
     try {
       const res = await axios
       .post(`http://localhost:4000/addcomment`, 
@@ -73,6 +58,7 @@ const BlogDetails = () => {
            "targetId":targetId,
            "comments":[]
       },{ headers: { "auth-token": data.token }})
+      setComment("")
       getPost()
     } catch (error) {
       console.log(error)
@@ -100,12 +86,12 @@ const BlogDetails = () => {
             />
             <div className="text-left lg:w-2/3 w-full">
               <h1 className="title-font flex justify-between items-center sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
-                {post.title} {data.id === post.author._id && (<span className="inline-block my-auto">
+                {post.title} {data.id === post.author._id && (<div className="flex space-x-2 my-auto">
                 <Link className="flex justify-center" to={`/Home/edit/${post._id}`}>
-            <AiFillEdit></AiFillEdit>
-           
-          </Link>
-                </span>)}
+                <AiFillEdit></AiFillEdit>
+                </Link>
+                <FaTrash size={".90em"} onClick={handleDelete} className="cursor-pointer"></FaTrash>
+                </div>)}
               </h1>
               <p className=" text-xs text-gray-600">{post.summary}</p>
               <p
@@ -115,13 +101,14 @@ const BlogDetails = () => {
             </div>
             <div className="flex ">
             </div>
-            <div className="lg:w-2/3">
-              <div>
+            <div className="w-full lg:w-2/3">
+              <form onSubmit={(e)=>addComment(e,comment,"Post",params.id)}>
                 <input type="text" value={comment} onChange={(e)=>setComment(e.target.value)}
-                ></input>
-                <button onClick={()=>addComment(comment,"Post",params.id)}>comment</button>
-              </div>
-            <CommentsList comments={post?.comments}/>
+                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 focus:outline-none focus:border-sky-500"
+                placeholder="Add Your Comment here...."></input>
+                
+              </form>
+            <CommentsList comments={post?.comments} getPost={getPost}/>
             </div>
           </div>
         </section>
