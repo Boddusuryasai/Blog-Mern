@@ -136,13 +136,20 @@ exports.editPost = async (req, res) => {
         if (post.author?.toString() !== req.user) {
             return res.status(401).send("Not Allowed");
         }
+        let updateFields = {
+          title,
+          summary,
+          content,
+          author: req.user
+        };
         const file = req.file
-        const fileUri = getDataUri(file)
-        const cloud = await cloudinary.v2.uploader.upload(fileUri.content)
-    post = await Post.findByIdAndUpdate(req.params.id, { title,
-      summary,
-      content,
-      cover:cloud.secure_url,  author:req.user });
+        if (file) {
+          const fileUri = getDataUri(file);
+          const cloud = await cloudinary.v2.uploader.upload(fileUri.content);
+          updateFields.cover = cloud.secure_url;
+        }
+        
+         post = await Post.findByIdAndUpdate(req.params.id, updateFields);
     res.status(200).json({
       success: true,
       message: "post updated Successfully",

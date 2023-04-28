@@ -29,10 +29,10 @@ const EditPost = () => {
         url: `${BASEURL}/post/${params.id}`,
         headers: { "auth-token": data.token },
       });
-      setTitle(res.data.posts.title);
-      setSummary(res.data.posts.summary);
-      setContent(res.data.posts.content);
-      setImgPrev(res.data.posts.cover)
+      setTitle(res.data.post.title);
+      setSummary(res.data.post.summary);
+      setContent(res.data.post.content);
+      imgPrev && setImgPrev(res.data.post.cover)
       
     } catch (error) {
       console.log(error);
@@ -129,7 +129,7 @@ const EditPost = () => {
           <input
             className="block  text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 w-full p-2.5 focus:outline-none "
             id="file_input"
-            type="file" required
+            type="file" 
             onChange={handleImgUpload}
           />
            <div >
